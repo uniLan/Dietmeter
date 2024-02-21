@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Diameter - Your Fitness and Diet Companion</title>
+    <link rel="stylesheet" href="style.css">
+    <script defer src="script.js"></script>
+</head>
+<body>
+    <header>
+        <div class="top-bar">
+            <div class="top-bar-content">
+                <div class="top-bar-left">Dietmeter</div>
+                <div class="top-bar-right">
+                    <a href="\src\profile\profile.html" class="top-bar-link">Profile</a>
+                    <a href="#" class="top-bar-link">Settings</a>
+                </div>
+            </div>
+            <div class="top-bar-bottom">Diameter - Your Fitness and Diet Companion</div>
+        </div>
+    </header>
+    
+
+    <main class="activity-grid">
+        <section id="today-activities" class="activity-container">
+            <h2>Today's Activities</h2>
+            <div class="activity-list">
+                <!-- Dynamically filled with today's activities -->
+            </div>
+            <button onclick="addActivity()">Add Activity</button>
+        </section>
+
+        <section id="undid-activities" class="activity-container">
+            <h2>Missed Activities</h2>
+            <div class="missed-activity-list">
+                <!-- Dynamically filled with missed activities -->
+            </div>
+        </section>
+
+        <section id="record-meal" class="activity-container">
+            <h2>Record a Meal</h2>
+            <button onclick="openMealRecording()">Record Meal</button>
+        </section>
+
+        <section id="meal-suggestions" class="activity-container">
+            <h2>Meal Suggestions</h2>
+            <div class="meal-suggestions-list">
+                <!-- Dynamically filled with meal suggestions -->
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <!-- Footer content here -->
+    </footer>
+</body>
+</html>
