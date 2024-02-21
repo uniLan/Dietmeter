@@ -1,2 +1,2 @@
 # Dietmeter
-An app for healthy program
+An entrance for healthier life
