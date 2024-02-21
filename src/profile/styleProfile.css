@@ -16,7 +16,8 @@
 }
 
 .home-link {
-    color: #fff; /* Matches the top bar text color */
+    background-color: #333;
+    color: #7bd4b2; /* Matches the top bar text color */
     text-decoration: none; /* Removes underline from link */
     font-size: 20px; /* Adjust size as needed */
 }
