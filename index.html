@@ -50,6 +50,22 @@
         </section>
     </main>
 
+    <!-- Add this inside the <body>, preferably at the end before the closing </body> tag -->
+    <div id="chat-icon" onclick="toggleChatWindow()">Chat</div>
+    <div id="chat-window" class="hiddenCtrl-hide">
+        <div id="chat-messages-container">
+            <div id="chat-messages">
+                <!-- Chat messages will be dynamically inserted here -->
+            </div>
+        </div>
+        <div id="chat-input-container">
+            <input type="text" id="chat-input" placeholder="Type a message...">
+            <button onclick="sendMessage()">Send</button>
+        </div>
+    </div>
+    
+    </div>
+
     <footer>
         <!-- Footer content here -->
     </footer>

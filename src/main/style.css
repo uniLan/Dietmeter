@@ -93,3 +93,64 @@ button:hover {
         grid-template-columns: 1fr;
     }
 }
+
+/* Add these styles to your existing CSS file */
+#chat-icon {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background-color: #007bff;
+    color: white;
+    padding: 10px;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+#chat-window {
+    position: fixed;
+    bottom: 70px;
+    right: 20px;
+    width: 300px;
+    height: 400px;
+    flex-direction: column;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    overflow: hidden; /* Ensures no overflow outside the chat window */
+}
+
+#chat-messages-container {
+    flex-grow: 1;
+    overflow-y: auto; /* Makes this part scrollable */
+}
+
+.chat-message {
+    margin-bottom: 10px;
+    padding: 5px;
+    background-color: #f1f1f1;
+    border-radius: 5px;
+}
+
+#chat-input-container {
+    display: flex;
+    padding: 10px;
+    background: #f1f1f1;
+    border-top: 1px solid #ddd; /* Optional: adds a line between the chat and input area */
+}
+
+#chat-input {
+    flex-grow: 1;
+    margin-right: 10px; /* Spacing between input and send button */
+}
+
+button {
+    padding: 5px 10px; /* Adjust padding as needed */
+}
+
+.hiddenCtrl-hide {
+    display: none;
+}
+
+.hiddenCtrl-show {
+    display: flex;
+}
+
