@@ -1,13 +1,38 @@
-function addActivity() {
-    alert("Here you would open a form or modal to add a new activity.");
+function setupTemporaryResponseHandler(type) {
+    const originalOnClick = document.getElementById('chat-send').onclick; // Save the original onclick handler
+
+    document.getElementById('chat-send').onclick = function() {
+        const userInput = document.getElementById('chat-input').value;
+        if (userInput.trim() !== '') {
+            let responseMessage;
+            if (type === "meal") {
+                responseMessage = `You ate: ${userInput}`;
+            } else if (type === "activity") {
+                responseMessage = `You did: ${userInput}`;
+            }
+            // Echo the response in the chat window
+            document.getElementById('chat-messages').innerHTML += `<div class="chat-message">${responseMessage}</div>`;
+            document.getElementById('chat-input').value = ''; // Clear the input field
+            document.getElementById('chat-messages-container').scrollTop = document.getElementById('chat-messages-container').scrollHeight; // Scroll to latest message
+
+            // Restore the original chat functionality after echoing the response
+            document.getElementById('chat-send').onclick = originalOnClick;
+        }
+    };
 }
 
-function openMealRecording() {
-    alert("Here you would open a form or modal to record a new meal.");
-    openChatWindow()
-    const userInput = sendNewMessage("What you eat? How many?");
-    sendNewMessage("You ate: " + userInput);
+function recordMeal() {
+    openChatWindow();
+    document.getElementById('chat-messages').innerHTML += '<div class="chat-message">What meal did you get, how many?</div>';
+    setupTemporaryResponseHandler("meal");
 }
+
+function addActivity() {
+    openChatWindow();
+    document.getElementById('chat-messages').innerHTML += '<div class="chat-message">What exercise did you do, and how many?</div>';
+    setupTemporaryResponseHandler("activity");
+}
+
 
 function toggleChatWindow() {
     const chatWindow = document.getElementById('chat-window');
@@ -63,8 +88,4 @@ function sendMessage() {
     }
 }
 
-function sendNewMessage(message) {
-    document.getElementById('chat-input').value = message;
-    return sendMessage();
-}
 
