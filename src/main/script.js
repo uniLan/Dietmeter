@@ -4,18 +4,34 @@ function setupTemporaryResponseHandler(type) {
     document.getElementById('chat-send').onclick = function() {
         const userInput = document.getElementById('chat-input').value;
         if (userInput.trim() !== '') {
-            let responseMessage;
+            let confirmationMessage;
             if (type === "meal") {
-                responseMessage = `You ate: ${userInput}`;
+                // Add the meal to the meal list
+                const mealList = document.getElementById('meal-list');
+                const mealItem = document.createElement('div');
+                mealItem.textContent = `Meal: ${userInput}`;
+                mealList.appendChild(mealItem);
+                confirmationMessage = `You ate: ${userInput}`;
             } else if (type === "activity") {
-                responseMessage = `You did: ${userInput}`;
+                // Add the activity to the activity list
+                const activityList = document.getElementById('today-activities').querySelector('.activity-list');
+                const activityItem = document.createElement('div');
+                activityItem.textContent = `Activity: ${userInput}`;
+                activityList.appendChild(activityItem);
+                confirmationMessage = `You did: ${userInput}`;
             }
-            // Echo the response in the chat window
-            document.getElementById('chat-messages').innerHTML += `<div class="chat-message">${responseMessage}</div>`;
+
+            // Echo the confirmation message in the chat window
+            const chatMessages = document.getElementById('chat-messages');
+            const messageDiv = document.createElement('div');
+            messageDiv.classList.add('chat-message'); // Assuming you have CSS for .chat-message
+            messageDiv.textContent = confirmationMessage;
+            chatMessages.appendChild(messageDiv);
+
             document.getElementById('chat-input').value = ''; // Clear the input field
             document.getElementById('chat-messages-container').scrollTop = document.getElementById('chat-messages-container').scrollHeight; // Scroll to latest message
 
-            // Restore the original chat functionality after echoing the response
+            // Restore the original chat functionality after echoing the response and adding the item
             document.getElementById('chat-send').onclick = originalOnClick;
         }
     };
