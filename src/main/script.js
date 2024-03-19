@@ -14,7 +14,7 @@ function setupTemporaryResponseHandler(type) {
                 const mealItem = document.createElement('div');
                 mealItem.textContent = `Meal: ${userInput}`;
                 mealListDoc.appendChild(mealItem);
-                mealList.push(userInput)
+                mealList.push(userInput);
                 confirmationMessage = `You ate: ${userInput}`;
             } else if (type === "activity") {
                 // Add the activity to the activity list
@@ -117,6 +117,7 @@ function sendMessage() {
             });
         } else if (userInput === 'New meal') {
             botAddMessage("Meal Suggestions updated");
+            updateMealSuggestion();
         } else {
             botAddMessage("SERVISE ERROR:!");
         }
@@ -132,4 +133,19 @@ function botAddMessage(msge) {
     document.getElementById('chat-messages').innerHTML += `<div class="chat-message">Bot: ${msge}</div>`;
 }
 
-
+let counter = 0;
+function updateMealSuggestion() {
+    let meals = "";
+    if (counter == 0) {
+        meals = 'Steak 12oz and Apple juice 300ml';
+        counter++;
+    } else {
+        meals = 'Prime Rib 15oz and Lette 10grams';
+        counter--;
+    }
+    const mealListDoc = document.getElementById('meal-suggestions-list');
+    const mealItem = document.createElement('div');
+    mealItem.textContent = meals;
+    mealListDoc.appendChild(mealItem);
+    
+}
