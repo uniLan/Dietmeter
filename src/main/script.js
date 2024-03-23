@@ -1,6 +1,17 @@
 const mealList = [];
 const activityList = [];
 
+const dummyConversation = []
+/**
+ * This function will get the user input and return question from the user input. Return SERVICE ERROR if nothing found.
+ */
+function questionHandler() {
+    //TODO
+    getuserInput(); // get user input
+    botAddMessage(); // send to the chat
+
+}
+
 function setupTemporaryResponseHandler(type) {
     const originalOnClick = document.getElementById('chat-send').onclick; // Save the original onclick handler
 
