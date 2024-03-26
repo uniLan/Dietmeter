@@ -3,82 +3,83 @@ const activityList = [];
 
 let dummyConver = {
     "what should I eat today to lose weight?": 
-        `Breakfast\n
-        Oatmeal with Berries and Almonds\n
-        1/2 cup of cooked oatmeal (prepared with water)\n
-        1/2 cup of mixed berries (fresh or frozen and thawed)\n
-        A sprinkle of cinnamon\n
-        10-12 raw almonds\n
-        Optional: A tablespoon of flaxseeds or chia seeds for extra fiber\n
-    Mid-Morning Snack\n
-        Greek Yogurt and a Piece of Fruit\n
-        3/4 cup of plain, non-fat Greek yogurt\n
-        1 medium apple or pear\n
-    Lunch\n
-        Grilled Chicken Salad\n
-        3-4 ounces of grilled chicken breast, sliced\n
-        2 cups of mixed salad greens (spinach, arugula, kale)\n
-        Cherry tomatoes, cucumber, and carrot slices\n
-        1/4 avocado, sliced\n
-        Dressing: 1 tablespoon of olive oil mixed with lemon juice and herbs\n
-        1 whole-grain roll or slice of bread on the side\n
-    Afternoon Snack\n
-        Vegetable Sticks with Hummus\n
-        1/2 cup of hummus\n
-        Carrot sticks, cucumber slices, and bell pepper strips for dipping\n
-    Dinner\n
-        Baked Salmon with Quinoa and Steamed Vegetables\n
-        3-4 ounces of baked or grilled salmon seasoned with herbs and lemon\n
-        1/2 cup of cooked quinoa\n
-        1 cup of steamed broccoli and cauliflower\n
-        Optional: Drizzle vegetables with a teaspoon of olive oil or lemon juice for added flavor\n
-    Evening Snack (if needed)\n
-        Handful of Mixed Nuts\n
-        About 15 mixed nuts (almonds, walnuts, pistachios) - avoid salted varieties\n
-    Tips for Weight Loss Meal Planning:\n
-        Portion Control: Stick to the portion sizes mentioned to keep your calorie intake in check.\n
-        Stay Hydrated: Drink at least 8 glasses of water throughout the day. Sometimes thirst is confused with hunger.\n
-        Adjust as Needed: If you're more active, you may need additional calories. Consider adding more protein or whole grains.\n
-        Limit Added Sugars and Refined Carbs: These can contribute to weight gain and reduce the effectiveness of your weight loss efforts.\n
-        Prepare in Advance: Meal prepping can help you stick to your meal plan and avoid reaching for convenient, less healthy options.\n`,
+        `Breakfast<br>
+        Oatmeal with Berries and Almonds<br>
+        1/2 cup of cooked oatmeal (prepared with water)<br>
+        1/2 cup of mixed berries (fresh or frozen and thawed)<br>
+        A sprinkle of cinnamon<br>
+        10-12 raw almonds<br>
+        Optional: A tablespoon of flaxseeds or chia seeds for extra fiber<br>
+    Mid-Morning Snack<br>
+        Greek Yogurt and a Piece of Fruit<br>
+        3/4 cup of plain, non-fat Greek yogurt<br>
+        1 medium apple or pear<br>
+    Lunch<br>
+        Grilled Chicken Salad<br>
+        3-4 ounces of grilled chicken breast, sliced<br>
+        2 cups of mixed salad greens (spinach, arugula, kale)<br>
+        Cherry tomatoes, cucumber, and carrot slices<br>
+        1/4 avocado, sliced<br>
+        Dressing: 1 tablespoon of olive oil mixed with lemon juice and herbs<br>
+        1 whole-grain roll or slice of bread on the side<br>
+    Afternoon Snack<br>
+        Vegetable Sticks with Hummus<br>
+        1/2 cup of hummus<br>
+        Carrot sticks, cucumber slices, and bell pepper strips for dipping<br>
+    Dinner<br>
+        Baked Salmon with Quinoa and Steamed Vegetables<br>
+        3-4 ounces of baked or grilled salmon seasoned with herbs and lemon<br>
+        1/2 cup of cooked quinoa<br>
+        1 cup of steamed broccoli and cauliflower<br>
+        Optional: Drizzle vegetables with a teaspoon of olive oil or lemon juice for added flavor<br>
+    Evening Snack (if needed)<br>
+        Handful of Mixed Nuts<br>
+        About 15 mixed nuts (almonds, walnuts, pistachios) - avoid salted varieties<br>
+    Tips for Weight Loss Meal Planning:<br>
+        Portion Control: Stick to the portion sizes mentioned to keep your calorie intake in check.<br>
+        Stay Hydrated: Drink at least 8 glasses of water throughout the day. Sometimes thirst is confused with hunger.<br>
+        Adjust as Needed: If you're more active, you may need additional calories. Consider adding more protein or whole grains.<br>
+        Limit Added Sugars and Refined Carbs: These can contribute to weight gain and reduce the effectiveness of your weight loss efforts.<br>
+        Prepare in Advance: Meal prepping can help you stick to your meal plan and avoid reaching for convenient, less healthy options.<br>`,
 
     "what exercises should I do today?": 
-        `Here's a simple and effective routine that you can do at home or at a gym, requiring minimal equipment:\n
-        Warm-up (5-10 minutes)\n
-        Marching on the spot: 2 minutes\n
-        Arm circles: 30 seconds each direction\n
-        Leg swings: 30 seconds each leg\n
-        Dynamic stretches (e.g., lunges with a twist): 2 minutes\n
-        Aerobic Exercise (15-20 minutes)\n
-        Brisk walking or light jogging: If you're at home without a treadmill, consider walking or jogging in place, stepping side to side, or following a beginner's cardio workout video online. Aim for a continuous, moderate pace where you can talk but not sing.\n
-        Strength Training (15-20 minutes)\n
-        Perform each exercise for 30 seconds to 1 minute, followed by 30 seconds of rest. Complete two rounds of the following circuit:\n
-        Bodyweight squats: Focus on form, keeping your chest up and knees behind your toes.\n
-        Push-ups: Beginners can start with wall push-ups or knee push-ups.\n
-        Planks: Start with a 20-30 second hold, aiming to keep a straight line from head to heels.\n
-        Lunges: Alternate legs, stepping forward and bending both knees to about 90 degrees.\n
-        Glute bridges: Lie on your back with knees bent and feet flat on the floor, then lift your hips towards the ceiling.\n
-        Flexibility and Cool Down (5-10 minutes)\n
-        Hamstring stretch: Sit on the floor with one leg extended, the other bent, and reach towards your toes. Hold for 20-30 seconds each leg.\n
-        Quad stretch: Stand and pull one foot towards your glutes, keeping your knees together. Hold onto a wall or chair for balance. 20-30 seconds each leg.\n
-        Arm across chest stretch: Pull one arm across your chest with the other, stretching the shoulder. 20-30 seconds each arm.\n
-        Deep breathing and relaxation: Spend a few minutes doing deep abdominal breathing to relax and cool down.\n
-        Tips for Success:\n
-        Stay hydrated: Drink water before, during, and after your workout.\n
-        Listen to your body: If something hurts, stop and rest. It's important to push yourself, but not to the point of pain.\n
-        Be consistent: Aim to do this workout 2-3 times a week, with rest or light activity days in between.\n
-        Progress gradually: As you get stronger and more comfortable with the exercises, increase the duration, add more rounds to your circuit, or include new exercises.\n
-        Remember, the goal is to build a habit of regular physical activity, so find exercises that you enjoy and that fit into your lifestyle.\n`,
+        `Here's a simple and effective routine that you can do at home or at a gym, requiring minimal equipment:<br>
+        Warm-up (5-10 minutes)<br>
+        Marching on the spot: 2 minutes<br>
+        Arm circles: 30 seconds each direction<br>
+        Leg swings: 30 seconds each leg<br>
+        Dynamic stretches (e.g., lunges with a twist): 2 minutes<br>
+        Aerobic Exercise (15-20 minutes)<br>
+        Brisk walking or light jogging: If you're at home without a treadmill, consider walking or jogging in place, stepping side to side, or following a beginner's cardio workout video online. Aim for a continuous, moderate pace where you can talk but not sing.<br>
+        Strength Training (15-20 minutes)<br>
+        Perform each exercise for 30 seconds to 1 minute, followed by 30 seconds of rest. Complete two rounds of the following circuit:<br>
+        Bodyweight squats: Focus on form, keeping your chest up and knees behind your toes.<br>
+        Push-ups: Beginners can start with wall push-ups or knee push-ups.<br>
+        Planks: Start with a 20-30 second hold, aiming to keep a straight line from head to heels.<br>
+        Lunges: Alternate legs, stepping forward and bending both knees to about 90 degrees.<br>
+        Glute bridges: Lie on your back with knees bent and feet flat on the floor, then lift your hips towards the ceiling.<br>
+        Flexibility and Cool Down (5-10 minutes)<br>
+        Hamstring stretch: Sit on the floor with one leg extended, the other bent, and reach towards your toes. Hold for 20-30 seconds each leg.<br>
+        Quad stretch: Stand and pull one foot towards your glutes, keeping your knees together. Hold onto a wall or chair for balance. 20-30 seconds each leg.<br>
+        Arm across chest stretch: Pull one arm across your chest with the other, stretching the shoulder. 20-30 seconds each arm.<br>
+        Deep breathing and relaxation: Spend a few minutes doing deep abdominal breathing to relax and cool down.<br>
+        Tips for Success:<br>
+        Stay hydrated: Drink water before, during, and after your workout.<br>
+        Listen to your body: If something hurts, stop and rest. It's important to push yourself, but not to the point of pain.<br>
+        Be consistent: Aim to do this workout 2-3 times a week, with rest or light activity days in between.<br>
+        Progress gradually: As you get stronger and more comfortable with the exercises, increase the duration, add more rounds to your circuit, or include new exercises.<br>
+        Remember, the goal is to build a habit of regular physical activity, so find exercises that you enjoy and that fit into your lifestyle.<br>`,
 
     "I am 200 pounds and 6 feet tall, how many calories should I eat in a day to lose weight?":
-        `To lose weight, you need to eat fewer calories than your TDEE. A deficit of 500-1000 calories/day is a common goal that leads to a safe, sustainable weight loss of about 1-2 pounds per week.\n
-        For a moderate deficit: 2122 calories/day\n
-        So, to lose weight at a safe and sustainable pace, aim to consume around 2122 calories per day. Remember, these calculations provide an estimate. Adjustments may be necessary based on your progress, how you feel, and other individual factors.\n`,
+        `To lose weight, you need to eat fewer calories than your TDEE. A deficit of 500-1000 calories/day is a common goal that leads to a safe, sustainable weight loss of about 1-2 pounds per week.<br>
+        For a moderate deficit: 2122 calories/day<br>
+        So, to lose weight at a safe and sustainable pace, aim to consume around 2122 calories per day. Remember, these calculations provide an estimate. Adjustments may be necessary based on your progress, how you feel, and other individual factors.<br>`,
 
     "I am 100 pounds and 5 foot 5 inches, what should i eat in a day to gain weight?": 
-        `Gaining weight in a healthy way involves consuming more calories than you burn while focusing on nutrient-rich foods to ensure you're also meeting your nutritional needs. Since you're aiming to gain weight, let's outline a meal plan that not only increases your calorie intake but also includes a balance of carbohydrates, proteins, and fats, along with vitamins and minerals essential for overall health.\n
-        Given your current weight and height, your goal is to create a caloric surplus. However, the exact number of calories you need depends on your age, gender, and level of physical activity. On average, adding an additional 300-500 calories per day above your maintenance calories can help you gain weight gradually and healthily
+        `Gaining weight in a healthy way involves consuming more calories than you burn while focusing on nutrient-rich foods to ensure you're also meeting your nutritional needs. Since you're aiming to gain weight, let's outline a meal plan that not only increases your calorie intake but also includes a balance of carbohydrates, proteins, and fats, along with vitamins and minerals essential for overall health.<br>
+        Given your current weight and height, your goal is to create a caloric surplus. However, the exact number of calories you need depends on your age, gender, and level of physical activity. On average, adding an additional 300-500 calories per day above your maintenance calories can help you gain weight gradually and healthily<br>`
 }
+
 /**
  * This function will get the user input and return question from the user input. Return SERVICE ERROR if nothing found.
  */
@@ -106,7 +107,10 @@ function questionHandler(userInput) {
         return;
     }
     if (dummyConver[userInput] !== undefined){
-        botAddMessage(dummyConver[userInput]);
+        setTimeout(() => {
+            botAddMessage(dummyConver[userInput]); //excuted after the 1600ms
+        }, 1600);
+       
         return;
     }
 	
@@ -234,3 +238,4 @@ function updateMealSuggestion() {
     mealListDoc.appendChild(mealItem);
     
 }
+
