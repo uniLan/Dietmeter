@@ -117,6 +117,14 @@ function questionHandler(userInput) {
     botAddMessage("SERVISE ERROR:!");
 }
 
+/**
+ * This function will sent the msge to the chatGPT and return the respound
+ * @param {String} msge 
+ */
+function getChatAns(msge) {
+
+}
+
 function setupTemporaryResponseHandler(type) {
     const originalOnClick = document.getElementById('chat-send').onclick; // Save the original onclick handler
 
