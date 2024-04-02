@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>HTTP Request Test</title>
+<script>
+function getChatAns(msge) {
+    const authKey = '';
+    return new Promise((resolve, reject) => {
+        const options = {
+            hostname: 'api.openai.com',
+            path: '/v1/chat/completions',
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': 'Bearer '
+            }
+        };
+
+        const req = new XMLHttpRequest();
+        
+        req.open(options.method, 'https://' + options.hostname + options.path, true);
+
+        req.setRequestHeader('Content-Type', options.headers['Content-Type']);
+        req.setRequestHeader('Authorization', options.headers['Authorization']);
+
+        req.onreadystatechange = function () {
+            if (req.readyState === 4) {
+                if (req.status === 200) {
+                    const response = JSON.parse(req.responseText);
+                    resolve(response);
+                } else {
+                    reject(new Error('Request failed with status ' + req.status));
+                }
+            }
+        };
+
+        req.send(JSON.stringify({
+            'model': 'gpt-3.5-turbo',
+            'messages': [
+                {
+                    'role': 'user',
+                    'content': msge
+                }
+            ],
+            'temperature': 0.7
+        }));
+    });
+}
+
+// Example usage
+function displayAnswer(response) {
+    const answer = response.choices[0].message.content;
+    document.getElementById('answer').innerHTML = `<div>${answer}</div>`;
+    const model = response.model;
+    const role = response.choices[0].message.role;
+    console.log(model + " " +role);
+}
+
+function getAndDisplayAnswer() {
+    getChatAns('Say this is a test!')
+        .then(displayAnswer)
+        .catch(error => console.error(error));
+}
+/*
+{
+    "id": "chatcmpl-abc123",
+    "object": "chat.completion",
+    "created": 1677858242,
+    "model": "gpt-3.5-turbo-0613",
+    "usage": {
+        "prompt_tokens": 13,
+        "completion_tokens": 7,
+        "total_tokens": 20
+    },
+    "choices": [
+        {
+            "message": {
+                "role": "assistant",
+                "content": "\n\nThis is a test!"
+            },
+            "logprobs": null,
+            "finish_reason": "stop",
+            "index": 0
+        }
+    ]
+}
+  */
+</script>
+</head>
+<body>
+<button onclick="getAndDisplayAnswer()">Get Chat Answer</button>
+<div id="answer"></div>
+</body>
+</html>
+
