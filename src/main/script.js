@@ -101,8 +101,8 @@ function displayAnswer(response) {
     console.log(model + " " +role);
 }
 
-function getAndDisplayAnswer() {
-    getChatAns('Say this is a test!')
+function getAndDisplayAnswer(mesg) {
+    getChatAns(mesg)
         .then(displayAnswer)
         .catch(error => console.error(error));
 }
