@@ -2,12 +2,18 @@ import https from 'https';
 
 const mealList = [];
 const activityList = [];
+const authKey = '';
 
+function inputAuthKey() {
+    authKey = prompt("Enter Authkey in training AI doc to unlock GPT chat: ");
+}
 /**
  * This function will get the user input and return question from the user input. Return SERVICE ERROR if nothing found.
  */
 function questionHandler(userInput) {
-    if (userInput === 'My meal') {
+    if (userInput.startsWith("#chat")) {
+        getAndDisplayAnswer(userInput.subString(4));
+    } else if (userInput === 'My meal') {
         // show temp chat
         botAddMessage("You meal:");
 
@@ -45,41 +51,61 @@ function questionHandler(userInput) {
  * @param {String} msge 
  */
 function getChatAns(msge) {
-    const options = {
-        hostname: 'api.openai.com',
-        path: '/v1/chat/completions',
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-            'Authorization': 'Bearer '
-        }
-    };
-
-    const req = https.request(options, function (res) {
-    const chunks = [];
-
-    res.on('data', function (chunk) {
-        chunks.push(chunk);
-    });
-
-    res.on('end', function () {
-        const body = Buffer.concat(chunks);
-        console.log(body.toString());
-        });
-    });
-
-    // req.write('{"model": "gpt-3.5-turbo","messages": [{"role": "user", "content": "Say this is a test!"}],"temperature": 0.7}');
-    req.write(JSON.stringify({
-        'model': 'gpt-3.5-turbo',
-        'messages': [
-            {
-            'role': 'user',
-            'content': 'Say this is a test!'
+    return new Promise((resolve, reject) => {
+        const options = {
+            hostname: 'api.openai.com',
+            path: '/v1/chat/completions',
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${authKey}`
             }
-        ],
-        'temperature': 0.7
-    }));
-    req.end();
+        };
+
+        const req = new XMLHttpRequest();
+        
+        req.open(options.method, 'https://' + options.hostname + options.path, true);
+
+        req.setRequestHeader('Content-Type', options.headers['Content-Type']);
+        req.setRequestHeader('Authorization', options.headers['Authorization']);
+
+        req.onreadystatechange = function () {
+            if (req.readyState === 4) {
+                if (req.status === 200) {
+                    const response = JSON.parse(req.responseText);
+                    resolve(response);
+                } else {
+                    reject(new Error('Request failed with status ' + req.status));
+                }
+            }
+        };
+
+        req.send(JSON.stringify({
+            'model': 'gpt-3.5-turbo',
+            'messages': [
+                {
+                    'role': 'user',
+                    'content': msge
+                }
+            ],
+            'temperature': 0.7
+        }));
+    });
+}
+
+// Example usage
+function displayAnswer(response) {
+    const answer = response.choices[0].message.content;
+    botAddMessage(answer);
+    const model = response.model;
+    const role = response.choices[0].message.role;
+    console.log(model + " " +role);
+}
+
+function getAndDisplayAnswer() {
+    getChatAns('Say this is a test!')
+        .then(displayAnswer)
+        .catch(error => console.error(error));
 }
 
 function setupTemporaryResponseHandler(type) {

@@ -6,6 +6,7 @@
 <title>HTTP Request Test</title>
 <script>
 function getChatAns(msge) {
+    const authKey = '';
     return new Promise((resolve, reject) => {
         const options = {
             hostname: 'api.openai.com',
@@ -28,8 +29,7 @@ function getChatAns(msge) {
             if (req.readyState === 4) {
                 if (req.status === 200) {
                     const response = JSON.parse(req.responseText);
-                    const answer = response;//response.choices[0].text;
-                    resolve(answer);
+                    resolve(response);
                 } else {
                     reject(new Error('Request failed with status ' + req.status));
                 }
@@ -50,8 +50,12 @@ function getChatAns(msge) {
 }
 
 // Example usage
-function displayAnswer(answer) {
-    document.getElementById('answer').innerText = answer;
+function displayAnswer(response) {
+    const answer = response.choices[0].message.content;
+    document.getElementById('answer').innerHTML = `<div>${answer}</div>`;
+    const model = response.model;
+    const role = response.choices[0].message.role;
+    console.log(model + " " +role);
 }
 
 function getAndDisplayAnswer() {
@@ -59,6 +63,30 @@ function getAndDisplayAnswer() {
         .then(displayAnswer)
         .catch(error => console.error(error));
 }
+/*
+{
+    "id": "chatcmpl-abc123",
+    "object": "chat.completion",
+    "created": 1677858242,
+    "model": "gpt-3.5-turbo-0613",
+    "usage": {
+        "prompt_tokens": 13,
+        "completion_tokens": 7,
+        "total_tokens": 20
+    },
+    "choices": [
+        {
+            "message": {
+                "role": "assistant",
+                "content": "\n\nThis is a test!"
+            },
+            "logprobs": null,
+            "finish_reason": "stop",
+            "index": 0
+        }
+    ]
+}
+  */
 </script>
 </head>
 <body>
@@ -66,3 +94,4 @@ function getAndDisplayAnswer() {
 <div id="answer"></div>
 </body>
 </html>
+
