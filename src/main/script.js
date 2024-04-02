@@ -1,8 +1,6 @@
-import https from 'https';
-
-const mealList = [];
-const activityList = [];
-const authKey = '';
+let mealList = [];
+let activityList = [];
+let authKey = '';
 
 function inputAuthKey() {
     authKey = prompt("Enter Authkey in training AI doc to unlock GPT chat: ");
@@ -12,7 +10,8 @@ function inputAuthKey() {
  */
 function questionHandler(userInput) {
     if (userInput.startsWith("#chat")) {
-        getAndDisplayAnswer(userInput.subString(4));
+        getAndDisplayAnswer(userInput.substring(4));
+        return;
     } else if (userInput === 'My meal') {
         // show temp chat
         botAddMessage("You meal:");
