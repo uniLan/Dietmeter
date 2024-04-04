@@ -34,13 +34,7 @@ function questionHandler(userInput) {
         updateMealSuggestion();
         return;
     }
-    if (dummyConver[userInput] !== undefined){
-        setTimeout(() => {
-            botAddMessage(dummyConver[userInput]); //excuted after the 1600ms
-        }, 1600);
-       
-        return;
-    }
+    
 	
     botAddMessage("SERVISE ERROR:!");
 }
