@@ -1,75 +1,235 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dietmeter - Your Fitness and Diet Companion</title>
-    <link rel="stylesheet" href="src/main/style.css">
-    <script defer src="src/main/script.js"></script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dietmeter</title>
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    background-color: #e9f1f3;
+    text-align: center;
+    padding: 20px;
+  }
+  .top-bar {
+    background-color: #333;
+    color: #fff;
+    padding: 10px 20px;
+    display: flex;
+    flex-direction: column;
+}
+
+.top-bar-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.top-bar-left {
+    font-size: 20px;
+}
+
+.top-bar-right {
+    display: flex;
+    align-items: center;
+}
+
+.top-bar-link {
+    color: #fff;
+    text-decoration: none;
+    padding: 0 10px;
+}
+
+.top-bar-link:hover {
+    text-decoration: underline;
+}
+
+.top-bar-bottom {
+    text-align: center;
+    margin-top: 10px;
+    font-size: 14px;
+}
+.content-contanier {
+  margin: auto;
+  max-width: 400px;
+}
+.header {
+  margin-bottom: 30px;
+  font-size: 24px;
+}
+.circle-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  align-items: center;
+}
+.circle {
+  margin: 10px;
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  border: 2px solid #00bcd4;
+  color: #00bcd4;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+.circle:hover {
+  transform: scale(1.1);
+}
+.circle-text {
+  margin-top: 5px;
+}
+
+#chat-window {
+    position: fixed;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width: 300px;
+    height: 400px;
+    flex-direction: column; /* Organizes children vertically */
+    border: 1px solid #ddd;
+    background: white;
+    border-radius: 10px;
+    overflow: hidden; /* Ensures no overflow outside the chat window */
+}
+.hiddenCtrl-hide {
+    display: none;
+}
+
+.hiddenCtrl-show {
+    display: flex;
+}
+#chat-messages-container {
+    flex-grow: 1;
+    overflow-y: auto; /* Makes this part scrollable */
+    padding: 10px; /* Adds some space around messages */
+}
+.chat-message {
+    margin-bottom: 10px;
+    padding: 5px;
+    background-color: #f1f1f1;
+    border-radius: 5px;
+    word-wrap: break-word; /* Ensure words break to prevent overflow */
+    overflow-wrap: break-word; /* An alternative to word-wrap for better support */
+    max-width: 280px; /* Adjust based on your container's size to ensure proper wrapping */
+    text-align: left;
+}
+#chat-input-container {
+    display: flex;
+    padding: 10px;
+    background: #f1f1f1;
+    border-top: 1px solid #ddd; /* Adds a line between the chat and input area */
+}
+#chat-input {
+    flex-grow: 1;
+    margin-right: 10px; /* Spacing between input and send button */
+}
+
+#chat-close {
+    position: absolute;
+    top: 5px;
+    right: 10px;
+    cursor: pointer;
+    color: #333;
+    font-weight: bold;
+}
+
+</style>
 </head>
 <body>
-    <header>
-        <div class="top-bar">
-            <div class="top-bar-content">
-                <div class="top-bar-left">Dietmeter</div>
-                <div class="top-bar-right">
-                    <a href="src/profile/profile.html" class="top-bar-link">Profile</a>
-                    <a href="src/setting/setting.html" class="top-bar-link">Settings</a>
+    <div class = content-contanier>
+        <header>
+            <div class="top-bar">
+                <div class="top-bar-content">
+                    <div class="top-bar-left">Dietmeter</div>
+                    <div class="top-bar-right">
+                        <a href="src/profile/profile.html" class="top-bar-link">Profile</a>
+                        <a onclick="inputAuthKey()" class="top-bar-link">AuthKey</a>
+                    </div>
+                </div>
+                <div class="top-bar-bottom">Dietmeter - Your Fitness and Diet Companion</div>
+            </div>
+        </header>
+        <div class="circle-container">
+            <div class="circle" onclick="alert('Steps feature coming soon!')">
+                <div>Steps</div>
+            </div>
+            <div class="circle" onclick="alert('Calories feature coming soon!')">
+                <div>Calories</div>
+            </div>
+            <div class="circle" onclick="alert('Workouts feature coming soon!')">
+                <div>Workouts</div>
+            </div>
+            <div class="circle" onclick="alert('Sleep feature coming soon!')">
+                <div>Sleep</div>
+            </div>
+            <div class="circle" onclick="toggleChatWindow()">
+                <div class="circle-text">Chat with Dietmeter</div>
+            </div>
+        </div>
+        <div id="chat-window" class="hiddenCtrl-hide">
+            <div id="chat-close" onclick="toggleChatWindow()">X</div> <!-- Close button -->
+            <div id="chat-messages-container">
+                <div id="chat-messages">
+                    <!-- Chat messages will be dynamically inserted here -->
                 </div>
             </div>
-            <div class="top-bar-bottom">Dietmeter - Your Fitness and Diet Companion</div>
-        </div>
-    </header>
-    
-    <main class="activity-grid">
-        <section id="today-activities" class="activity-container">
-            <h2>Today's Activities</h2>
-            <div class="activity-list">
-                <!-- Dynamically filled with today's activities -->
+            <div id="chat-input-container">
+                <input type="text" id="chat-input" placeholder="Type a message...">
+                <button id = "chat-send" onclick="sendMessage()">Send</button>
             </div>
-            <button onclick="addActivity()">Add Activity</button>
-        </section>
-
-        <section id="undid-activities" class="activity-container">
-            <h2>Missed Activities</h2>
-            <div class="missed-activity-list">
-                <!-- Dynamically filled with missed activities -->
-            </div>
-        </section>
-
-        <section id="record-meal" class="activity-container">
-            <h2>Record a Meal</h2>
-            <div id="meal-list">
-                <!-- Dynamically filled with today's activities -->
-            </div>
-            <button onclick="recordMeal()">Record Meal</button>
-            <button onclick="inputAuthKey()">AuthKeyInput</button>
-        </section>
-
-        <section id="meal-suggestions" class="activity-container">
-            <h2>Meal Suggestions</h2>
-            <div id="meal-suggestions-list">
-                <!-- Dynamically filled with meal suggestions -->
-            </div>
-        </section>
-    </main>
-
-    <!-- Add this inside the <body>, preferably at the end before the closing </body> tag -->
-    <div id="chat-icon" onclick="toggleChatWindow()">Chat</div>
-    <div id="chat-window" class="hiddenCtrl-hide">
-        <div id="chat-messages-container">
-            <div id="chat-messages">
-                <!-- Chat messages will be dynamically inserted here -->
-            </div>
-        </div>
-        <div id="chat-input-container">
-            <input type="text" id="chat-input" placeholder="Type a message...">
-            <button id = "chat-send" onclick="sendMessage()">Send</button>
         </div>
     </div>
 
-    <footer>
-        <!-- Footer content here -->
-    </footer>
 </body>
+<script>
+    let authKey = '';
+    function toggleChatWindow() {
+        const chatWindow = document.getElementById('chat-window');
+        if (chatWindow.classList.contains('hiddenCtrl-hide')) {
+            chatWindow.classList.remove('hiddenCtrl-hide');
+            chatWindow.classList.add('hiddenCtrl-show');
+        } else {
+            chatWindow.classList.remove('hiddenCtrl-show');
+            chatWindow.classList.add('hiddenCtrl-hide');
+        }
+    }
+    function sendMessage() {
+        return;
+    }
+    function inputAuthKey() {
+        authKey = prompt("Enter Authkey in training AI doc to unlock GPT chat: ");
+    }
+    function sendMessage() {
+        // Get the user's message from the input field
+        const userInput = document.getElementById('chat-input').value.trim();
+
+        // Check if the userInput is not empty
+        if (userInput !== '') {
+
+            userAddMessage(userInput);
+            questionHandler(userInput);
+
+        }
+    }
+    function userAddMessage(msge) {
+        document.getElementById('chat-messages').innerHTML += `<div class="chat-message">You: ${msge}</div>`;
+        document.getElementById('chat-input').value = ''; // Clear the input field
+        const chatMessagesContainer = document.getElementById('chat-messages-container');
+        chatMessagesContainer.scrollTop = chatMessagesContainer.scrollHeight;
+    }
+
+    function botAddMessage(msge) {
+        document.getElementById('chat-messages').innerHTML += `<div class="chat-message">Bot: ${msge}</div>`;
+        const chatMessagesContainer = document.getElementById('chat-messages-container');
+        chatMessagesContainer.scrollTop = chatMessagesContainer.scrollHeight;
+
+    }
+    </script>
 </html>
+
