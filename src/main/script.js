@@ -1,10 +1,20 @@
 let mealList = [];
 let activityList = [];
 let authKey = '';
+let userWeight = '';
+let userHeight = '';
+let goal = '';
+
+function logUserProfile() {
+    userWeight = prompt("Enter your weight");
+    userHeight = prompt("Enter your height");
+    goal = prompt("What is your goal?");
+}
 
 function inputAuthKey() {
     authKey = prompt("Enter Authkey in training AI doc to unlock GPT chat: ");
 }
+
 /**
  * This function will get the user input and return question from the user input. Return SERVICE ERROR if nothing found.
  */
