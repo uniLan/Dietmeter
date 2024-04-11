@@ -5,13 +5,13 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Dietmeter</title>
 <style>
-  body {
-    font-family: Arial, sans-serif;
-    background-color: #e9f1f3;
-    text-align: center;
-    padding: 20px;
-  }
-  .top-bar {
+body {
+  font-family: Arial, sans-serif;
+  background-color: #e9f1f3;
+  text-align: center;
+  padding: 20px;
+}
+.top-bar {
     background-color: #333;
     color: #fff;
     padding: 10px 20px;
@@ -148,7 +148,7 @@
                 <div class="top-bar-content">
                     <div class="top-bar-left">Dietmeter</div>
                     <div class="top-bar-right">
-                        <a href="src/profile/profile.html" class="top-bar-link">Profile</a>
+                        <a onclick="logUserProfile()" class="top-bar-link">Profile</a>
                         <a onclick="inputAuthKey()" class="top-bar-link">AuthKey</a>
                     </div>
                 </div>
@@ -156,18 +156,18 @@
             </div>
         </header>
         <div class="circle-container">
-            <div class="circle" onclick="alert('Steps feature coming soon!')">
+            <a class="circle" href="src/steps.html">
                 <div>Steps</div>
-            </div>
-            <div class="circle" onclick="alert('Calories feature coming soon!')">
+            </a>
+            <a class="circle" href="src/calories.html">
                 <div>Calories</div>
-            </div>
-            <div class="circle" onclick="alert('Workouts feature coming soon!')">
+            </a>
+            <a class="circle" href="src/workout.html">
                 <div>Workouts</div>
-            </div>
-            <div class="circle" onclick="alert('Sleep feature coming soon!')">
+            </a>
+            <a class="circle" href="src/sleeps.html">
                 <div>Sleep</div>
-            </div>
+            </a>
             <div class="circle" onclick="toggleChatWindow()">
                 <div class="circle-text">Chat with Dietmeter</div>
             </div>
@@ -188,7 +188,19 @@
 
 </body>
 <script>
+    let pre_promt = "you are a work out asistant called dietmeter."
     let authKey = '';
+    let userWeight = '';
+    let userHeight = '';
+    let goal = '';
+
+    function logUserProfile() {
+        userWeight = prompt("Enter your weight");
+        userHeight = prompt("Enter your height");
+        goal = prompt("What is your goal?");
+        pre_promt = "you are a work out asistant called dietmeter." + "weight: " + userWeight + "height: " + userHeight + "goal: " + goal
+    }
+
     function toggleChatWindow() {
         const chatWindow = document.getElementById('chat-window');
         if (chatWindow.classList.contains('hiddenCtrl-hide')) {
@@ -211,11 +223,19 @@
 
         // Check if the userInput is not empty
         if (userInput !== '') {
-
             userAddMessage(userInput);
-            questionHandler(userInput);
 
+            getChatAns(pre_promt + userInput)
+                .then(displayAnswer)
+                .catch(error => console.error(error));
         }
+    }
+    function displayAnswer(response) {
+        const answer = response.choices[0].message.content;
+        botAddMessage(answer.replace(/(\r\n|\n|\r)/gm, "<br>"));
+        const model = response.model;
+        const role = response.choices[0].message.role;
+        console.log(model + " " +role);
     }
     function userAddMessage(msge) {
         document.getElementById('chat-messages').innerHTML += `<div class="chat-message">You: ${msge}</div>`;
@@ -229,6 +249,54 @@
         const chatMessagesContainer = document.getElementById('chat-messages-container');
         chatMessagesContainer.scrollTop = chatMessagesContainer.scrollHeight;
 
+    }
+
+    /**
+     * This function will sent the msge to the chatGPT and return the respound
+     * @param {String} msge 
+     */
+    
+    function getChatAns(msge) {
+        return new Promise((resolve, reject) => {
+            const options = {
+                hostname: 'api.openai.com',
+                path: '/v1/chat/completions',
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${authKey}`
+                }
+            };
+
+            const req = new XMLHttpRequest();
+
+            req.open(options.method, 'https://' + options.hostname + options.path, true);
+
+            req.setRequestHeader('Content-Type', options.headers['Content-Type']);
+            req.setRequestHeader('Authorization', options.headers['Authorization']);
+
+            req.onreadystatechange = function () {
+                if (req.readyState === 4) {
+                    if (req.status === 200) {
+                        const response = JSON.parse(req.responseText);
+                        resolve(response);
+                    } else {
+                        reject(new Error('Request failed with status ' + req.status));
+                    }
+                }
+            };
+
+            req.send(JSON.stringify({
+                'model': 'gpt-3.5-turbo',
+                'messages': [
+                    {
+                        'role': 'user',
+                        'content': msge
+                    }
+                ],
+                'temperature': 0.7
+            }));
+        });
     }
     </script>
 </html>

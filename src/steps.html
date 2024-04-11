@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Steps Activities</title>
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    margin: 8;
+    background-color: #e9f1f3;
+    display: flex;
+    flex-direction: column;
+    justify-content: center; /* Centers horizontally */
+    align-items: center; /* Centers vertically */
+  }
+  #container {
+    width: 80%;
+    max-width: 400px;
+    padding: 10px;
+  }
+
+  #title {
+    text-align: center;
+    color: #333;
+    background-color: #EFEFEF;
+    border: 3px solid #5CCCE5;
+    padding: 10px;
+    font-size: 18px;
+    margin: 10px;
+  }
+  #activities-container {
+    height: 400px;
+    padding: 15px;
+    background-color: #EFEFEF;
+    list-style: none;
+    margin: 10px;
+    flex-direction: column;
+    overflow: hidden;
+    overflow-y: auto;
+  }
+  #activities {
+    margin-bottom: 2px;
+    padding: 5px;
+    background-color: #f1f1f1;
+    border-radius: 5px;
+    word-wrap: break-word; /* Ensure words break to prevent overflow */
+    overflow-wrap: break-word; /* An alternative to word-wrap for better support */
+    text-align: left;
+  }
+  #addActivityBtn {
+    background-color: #EFEFEF;
+    text-align: center;
+    padding: 10px;
+    margin: 10px;
+    cursor: pointer;
+    border: 2px solid #5CCCE5;
+  }
+  #addActivityBtn:hover {
+    background-color: #d4d4d4;
+  }
+
+</style>
+</head>
+<body>
+
+<div id="container">
+  <div id="title">STEPS</div>
+  <div id="activities-container">
+    
+  </div>
+  <div id="addActivityBtn" onclick="addActivity()">Add Steps</div>
+</div>
+
+<script>
+  function addActivity() {
+    var newActivity = prompt("How many step?")
+    document.getElementById('activities-container').innerHTML += `<div id="activities">${newActivity}</div>`;
+    document.getElementById('activities-container').scrollTop = document.getElementById('activities-container').scrollHeight; // Scroll to latest message
+  }
+</script>
+
+</body>
+</html>
