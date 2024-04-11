@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dietmeter - Your Fitness and Diet Companion</title>
+    <link rel="stylesheet" href="src/main/style.css">
+    <script defer src="src/main/script.js"></script>
+</head>
+<body>
+    <header>
+        <div class="top-bar">
+            <div class="top-bar-content">
+                <div class="top-bar-left">Dietmeter</div>
+                <div class="top-bar-right">
+                    <button onclick="inputAuthKey()">AuthKeyInput</button>
+                    <a href="src/profile/profile.html" class="top-bar-link">Profile</a>
+                    <a href="src/setting/setting.html" class="top-bar-link">Settings</a>
+                </div>
+            </div>
+            <div class="top-bar-bottom">Dietmeter - Your Fitness and Diet Companion</div>
+        </div>
+    </header>
+    
+    <main class="activity-grid">
+        <section id="today-activities" class="activity-container">
+            <h2>Today's Activities</h2>
+            <div class="activity-list">
+                <!-- Dynamically filled with today's activities -->
+            </div>
+            <button onclick="addActivity()">Add Activity</button>
+        </section>
+
+        <section id="undid-activities" class="activity-container">
+            <h2>Missed Activities</h2>
+            <div class="missed-activity-list">
+                <!-- Dynamically filled with missed activities -->
+            </div>
+        </section>
+
+        <section id="record-meal" class="activity-container">
+            <h2>Record a Meal</h2>
+            <div id="meal-list">
+                <!-- Dynamically filled with today's activities -->
+            </div>
+            <button onclick="recordMeal()">Record Meal</button>
+        </section>
+
+        <section id="meal-suggestions" class="activity-container">
+            <h2>Meal Suggestions</h2>
+            <div id="meal-suggestions-list">
+                <!-- Dynamically filled with meal suggestions -->
+            </div>
+        </section>
+    </main>
+
+    <!-- Add this inside the <body>, preferably at the end before the closing </body> tag -->
+    <div id="chat-icon" onclick="toggleChatWindow()">Chat</div>
+    <div id="chat-window" class="hiddenCtrl-hide">
+        <div id="chat-messages-container">
+            <div id="chat-messages">
+                <!-- Chat messages will be dynamically inserted here -->
+            </div>
+        </div>
+        <div id="chat-input-container">
+            <input type="text" id="chat-input" placeholder="Type a message...">
+            <button id = "chat-send" onclick="sendMessage()">Send</button>
+        </div>
+    </div>
+
+    <footer>
+        <!-- Footer content here -->
+    </footer>
+</body>
+</html>
