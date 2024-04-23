@@ -234,7 +234,7 @@ body {
     }
     function displayAnswer(response) {
         const answer = response.choices[0].message.content;
-        botAddMessage(answer.replace(/(\r\n|\n|\r)/gm, "<br>") + "<br><br>Wanring! AI may generates inaccurate info!");
+        botAddMessage(answer.replace(/(\r\n|\n|\r)/gm, "<br>") + "<br><br><i>Wanring! AI may generates inaccurate info!</i>");
         const model = response.model;
         const role = response.choices[0].message.role;
         console.log(model + " " +role);
